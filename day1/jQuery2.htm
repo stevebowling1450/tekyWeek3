@@ -1,0 +1,35 @@
+<html>
+
+    <head>
+        <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+        <title> </title>
+    </head>
+    <body>
+        <div id="top" style="width 100%; height: 200px; border: 40px solid black; background-color: gray;">
+            
+            My, my this is a pretty GRAY div.
+            </div>
+            <div id="bottom" style="width 100%; height: 200px; border: 40px solid black; background-color: blue;">
+            
+            My, my this is a pretty BLUE div.
+            </div>
+<br/>
+<button onclick="hideDivs()">Hide </button>
+<button onclick="showDivs()">Show </button>
+<button onclick="bottomDivs()">Hide Bottom </button>
+<button onclick="sbotDivs()">Show Bottom </button>
+        <script>    
+function hideDivs(){
+    $("div").fadeOut();}
+    
+    function showDivs(){
+    $("div").fadeIn("slow","linear").show();
+}
+function bottomDivs(){
+    $("#bottom").fadeOut();}
+    
+    function sbotDivs(){
+    $("#bottom").fadeIn("slow","linear").show();}
+        </script>
+    </body>
+</html>
