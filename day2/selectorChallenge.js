@@ -6,11 +6,11 @@ $(document).ready(function(){
 
 $(document).ready(function(){
     $("h3").mouseenter(function(){
-        $("h3").fadeTo( "fast",0.5)
+        $("h3").css( "color","green")
     });
 });
 $(document).ready(function(){
     $("ul :first-child").mouseenter(function(){
-        $("ul :first-child").fadeTo( "fast",0.5)
+        $("ul :first-child").css("color", "blue")
     });
 });
