@@ -38,4 +38,5 @@ $(function () {
 });
 function startOver() {
     location.reload();
-}
+};
+
