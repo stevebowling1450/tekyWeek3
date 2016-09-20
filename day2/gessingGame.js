@@ -11,12 +11,16 @@ function setupGame() {
 
     $("#intro").show();
     $("#game").hide();
-}
+    
+        
 
 function handleGuess() {
     var guess = $("#tbxGuess").val();
     if (+guess == answer) {
         $("#message").text("you are right");
+        $("#tbxGuess").hide();
+        
+        
 
     }
     else {
