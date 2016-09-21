@@ -29,8 +29,14 @@
     top: 70px;
     
 }
+body{
+    background-image: url(images/storm.jpg);
+    background-size:100% 125%;
+    background-repeat:no-repeat;
+
+}
 nav{
-    background-color: lightslategray;
+    background-color: lightseagreen;
     height: 50px;
     
 }
@@ -53,6 +59,10 @@ h2{
 
 }
 h4{
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+h3{
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
