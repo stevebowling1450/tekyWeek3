@@ -41,6 +41,20 @@ Normally, both your asses would be dead as fucking fried chicken, but you happen
 <!-- end slipsum code --></p>
         </div>
     </nav>
+    <script>
+        $(function() {
+$.ajax({
+    url:"https://api.darksky.net/forecast/13c7c3d7c0d1f00ccd3d109b56933094/37.8176,-82.7882",
+    dataType: "jsonp",
+    success: function(result){
+        console.log(result.currently.summary);
+    }
+});
+
+
+
+        });
+    </script>
 
 </body>
 
