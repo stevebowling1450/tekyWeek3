@@ -7,7 +7,28 @@
     background-image: url(images/rain.jpg);
     
 }
-
+#cloud{
+    background-image: url(images/cloud.png);
+    
+}
+#snow{
+    background-image: url(images/snow.jpg);
+    position: relative;
+    top: 70px;
+    
+}
+#clear{
+    background-image: url(images/clear.jpg);
+    position: relative;
+    top: 70px;
+    
+}
+#sleet{
+    background-image: url(images/sleet.jpg);
+    position: relative;
+    top: 70px;
+    
+}
 div {
     height: 400px;
   border-radius: 6px;
