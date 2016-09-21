@@ -3,7 +3,10 @@
     background-size: 100%;
     background-repeat:no-repeat;
 }
-
+#rain{
+    background-image: url(images/rain.jpg);
+    
+}
 
 div {
     height: 400px;
