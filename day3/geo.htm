@@ -22,22 +22,21 @@
    
     <script>
         function complete(result){
-            console.log("Summary"+" "+result.currently.summary);
-            console.log("Latitude"+" "+result.latitude);
-            console.log("Longitude"+" "+result.longitude);
-            console.log("Timezone" +" "+result.timezone);
+        console.log(result.results["0"].geometry.location.lat);
+        console.log(result.results["0"].geometry.location.lng);
+            
         }
         
       
         
         $(function(){ 
-             var dark=("37.8176,-82.7882") 
-             var lat= ("https://api.darksky.net/forecast/13c7c3d7c0d1f00ccd3d109b56933094/"+ dark )
+             var zip=("41240") 
+          var lat= ("https://maps.googleapis.com/maps/api/geocode/json?address="+zip+"&&key=AIzaSyCNRRK2Bi38Qu18i6J6D0QQ22W533WS7mw")
             var request= {
     
 
     url:(lat),
-    dataType: "jsonp",
+    //dataType: "jsonp",
     success: complete
             };
         
