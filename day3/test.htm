@@ -24,7 +24,34 @@
         function googlecomplete(reply){
      var lat = reply.results["0"].geometry.location.lat;
      var long =reply.results["0"].geometry.location.lng;
-        //console.log(lat +","+ long);
+       // console.log(lat +","+ long);
+     
+
+
+function darkcomplete(result){
+             console.log("Summary"+" "+result.currently.summary);
+             console.log("Latitude"+" "+result.latitude);
+             console.log("Longitude"+" "+result.longitude);
+             console.log("Timezone" +" "+result.timezone);
+         }
+        
+      
+        
+
+         $(function(){ 
+               
+              var x= ("https://api.darksky.net/forecast/13c7c3d7c0d1f00ccd3d109b56933094/"+lat +"," +long )
+             var request= {
+    
+
+     url:(x),
+     dataType: "jsonp",
+     success: darkcomplete
+             };
+        
+         $.ajax(request);
+         });
+
         }
        
         $(function(){ 
@@ -45,32 +72,8 @@
        
         
         
+       
         
-        function darkcomplete(result){
-             console.log("Summary"+" "+result.currently.summary);
-             console.log("Latitude"+" "+result.latitude);
-             console.log("Longitude"+" "+result.longitude);
-             console.log("Timezone" +" "+result.timezone);
-         }
-        
-      
-        function calldarksky(lat,long){
-            
-        };
-
-         $(function(){ 
-              var dark=("37.8176,-82.7882") 
-              var x= ("https://api.darksky.net/forecast/13c7c3d7c0d1f00ccd3d109b56933094/"+ dark )
-             var request= {
-    
-
-     url:(x),
-     dataType: "jsonp",
-     success: darkcomplete
-             };
-        
-         $.ajax(request);
-         });
     </script>
 
 </body>

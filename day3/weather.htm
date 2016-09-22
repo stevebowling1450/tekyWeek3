@@ -19,31 +19,23 @@
 </head>
 
 <body>
-   
-    <script>
-        function done(reply){
-        console.log(reply.results["0"].geometry.location.lat);
-     console.log(reply.results["0"].geometry.location.lng);
-       //console.log(reply);
-            
+   <div>
+        </div>
+            // **********************
+        // **  Event Handlers  **
+        // **********************
+        function lookupWeatherForPostalCode_Click() {
+            var pcode = $("#postalCode").val();
+            console.log("The value of the postal code box is " + pcode);
         }
-        
-      
-        
-        $(function(){ 
-             var zip=("41257") 
-          var zipcode= ("https://maps.googleapis.com/maps/api/geocode/json?address="+zip+"&&key=AIzaSyCNRRK2Bi38Qu18i6J6D0QQ22W533WS7mw")
-            var ask= {
-    
 
-    url:(zipcode),
-    //dataType: "jsonp",
-    success: done
-            };
-        
-        $.ajax(ask);
+        // ***********************
+        // **  Document ready.  **
+        // ***********************
+
+        $(function() {
+            $("#lookupWeatherForPostalCode").on("click", lookupWeatherForPostalCode_Click)
         });
-    </script>
 
 </body>
 

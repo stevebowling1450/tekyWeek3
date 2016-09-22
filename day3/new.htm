@@ -1,0 +1,111 @@
+<html>
+
+<head>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Weatherly</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                Lookup Weather for Postal Code:
+            </div>
+            <div class="col-md-8">
+                <label>Enter a postal code: <input type="text" id="postalCode" placeholder="postal code" /></label>
+                <button type="button" id="lookupWeatherForPostalCode">Lookup</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+       
+
+        function lookupLatLong_Complete(result) {
+            var lat = result.results["0"].geometry.location.lat;
+            var long = result.results["0"].geometry.location.lng;
+          
+            function darkcomplete(result){
+             console.log("Summary"+" "+result.currently.summary);
+             console.log("Temp:"+" "+result.currently.temperature);
+             console.log("Rain"+" "+result.currently.precipProbability+"%");
+             console.log("Timezone" +" "+result.timezone);
+         }
+        
+      
+        
+
+         $(function(){ 
+               
+              var x= ("https://api.darksky.net/forecast/13c7c3d7c0d1f00ccd3d109b56933094/"+lat +"," +long )
+             var request= {
+    
+
+     url:(x),
+     dataType: "jsonp",
+     success: darkcomplete
+             };
+        
+         $.ajax(request);
+         });        
+    
+}
+
+        function lookupLatLong(city, state, postalCode) {
+            var address = "";
+            if (postalCode.length != 0) {
+                address = postalCode.trim();
+            }
+            else if (city.length != 0 && state != 0) {
+                address = city.trim() + ", " + state;
+            }
+            else {
+                return;
+            }
+
+           
+            var googleUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=AIzaSyAQsMF6GQMAD_JlBLibE1ZprVVwxK0kfac";
+
+            var request = {
+                url: googleUrl,
+                success: lookupLatLong_Complete
+            };
+
+            $.ajax(request);
+        }
+
+        function lookupWeatherForPostalCode_Click() {
+            var pcode = $("#postalCode").val();
+            lookupLatLong("", "", pcode);
+        }
+
+        
+
+        $(function() {
+            $("#lookupWeatherForPostalCode").on("click", lookupWeatherForPostalCode_Click)
+        });
+
+        </script>
+
+</body>
+
+</html>
