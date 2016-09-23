@@ -3,15 +3,15 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
     crossorigin="anonymous">
 
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+    crossorigin="anonymous">
 
 <!-- Latest compiled and minified JavaScript -->
-   <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-   
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>>
-
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <link rel="stylesheet" type="text/css" href="weatherly.css">
-
 <head>
 	
 </head>
@@ -45,20 +45,13 @@
         function lookupLatLong_Complete(result) {
             var lat = result.results["0"].geometry.location.lat;
             var long = result.results["0"].geometry.location.lng;
-          $("#city").append(result.results["0"].formatted_address);
+          
             function darkcomplete(result){
-             console.log("Summary"+" "+result.currently.summary);
-             console.log("Temp:"+" "+result.currently.temperature);
-             console.log("Rain"+" "+result.currently.precipProbability+"%");
-             console.log("Timezone" +" "+result.timezone);
-         
-        
-         $("#temp").append(result.currently.temperature+"F");
-         $("#status").append(result.currently.summary);
-         $("#min").append(result.daily.data["0"].temperatureMin+"F");
-         $("#rain").append(result.currently.precipProbability+"%");
-         $("#max").append(result.daily.data["0"].temperatureMax+"F");
-        }
+            //  console.log("Summary"+" "+result.currently.summary);
+            //  console.log("Temp:"+" "+result.currently.temperature);
+            //  console.log("Rain"+" "+result.currently.precipProbability+"%");
+             console.log(result);
+         }
         
       
         
@@ -89,16 +82,14 @@
             }
             else {
                 return;
-                
             }
-           
+
            
             var googleUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=AIzaSyAQsMF6GQMAD_JlBLibE1ZprVVwxK0kfac";
 
             var request = {
                 url: googleUrl,
                 success: lookupLatLong_Complete
-                 
             };
 
             $.ajax(request);
@@ -119,31 +110,36 @@
 
 
 <div id="sunny" class="col-md-3">
-    <h4 id="city"><center></center></h4><br/>
-    <h1 id="temp"><center></center></h1>
-    <h2 id="status"><center></center></h2>
-    <hr/>
-    <table align="center">
-		<thead>
-			<tr>
-				<th id="min"></th>
-				<th id="rain"></th>
-                <th id="max"></th>
+   <div class="col-md-12">Paintsville
+       <div class="col-md-12">70&degF
+<div class="col-md-12">Clear
+<div class="col-md-12">
+       <div class="col-md-4">
+           <ul>
+               <li>70&degF</li>
+               <li>min</li>
+           </ul>
+       </div>
+       <div class="col-md-4">
+           <ul>
+               <li>70%</li>
+               <li>Rain</li>
+           </ul>
+       </div>
+       <div class="col-md-4">
+            <ul>
+               <li>70&degF</li>
+               <li>max</li>
+           </ul>
+       </div>
+   </div>
+</div>
+       </div>
+   </div>
 
-			</tr>
-		</thead>
-
-		<tbody>
-			
-			<tr>
-				<td> min </td>
-				<td>rain</td>
-                <td> max </td>
-
-			</tr>
-			</tbody>
-	</table>
-    </div>
+   
+   
+    
 
 
 
