@@ -5,19 +5,19 @@
 
 
 <!-- Latest compiled and minified JavaScript -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-    crossorigin="anonymous"></script>>
+   <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+   
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>>
 
 <link rel="stylesheet" type="text/css" href="weatherly.css">
 
 <head>
-
+	
 </head>
 
 <body>
-    <nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">Weatherly</a>
@@ -31,72 +31,55 @@
                 Lookup Weather for Postal Code:
             </div>
             <div class="col-md-8" pull-right>
-                <button type="button" class="btn btn-default pull-right" id="lookupWeatherForPostalCode">Lookup</button>
-                <label class="pull-right">Enter a postal code: <input type="text" id="postalCode" placeholder="postal code" /></label>
-
-
+                <button  type="button" onclick="testGenerateCard()" class="btn btn-default pull-right" id="lookupWeatherForPostalCode">Lookup</button>
+				<label class="pull-right">Enter a postal code: <input type="text" id="postalCode" placeholder="postal code" /></label>
+               
+                
             </div>
         </div>
     </div>
 
     <script>
-        
-         $(function() {
-            $("#lookupWeatherForPostalCode").on("click", lookupWeatherForPostalCode_Click)
-        });
 
-
-var sum = " ";
-var temp = " ";
-var rain = " ";
-var max = " ";
-var city = " ";
        
 
         function lookupLatLong_Complete(result) {
             var lat = result.results["0"].geometry.location.lat;
             var long = result.results["0"].geometry.location.lng;
-          city =result.results["0"].formatted_address;
-
-          var x = "https://api.darksky.net/forecast/13c7c3d7c0d1f00ccd3d109b56933094/"+lat +"," +long;
-          weatherLookup(x);
-
-        }
-
+          $("#city").append(result.results["0"].formatted_address);
             function darkcomplete(result){
              console.log("Summary"+" "+result.currently.summary);
              console.log("Temp:"+" "+result.currently.temperature);
              console.log("Rain"+" "+result.currently.precipProbability+"%");
              console.log("Timezone" +" "+result.timezone);
-             
-             sum = result.currently.summary;
-             temp =result.currently.temperature;
-             min =result.daily.data["0"].temperatureMin;
-            rain = result.currently.precipProbability;
-            max = result.daily.data["0"].temperatureMax;
-             testGenerateCard();
+       
         
+         $("#temp").append(result.currently.temperature+"F");
+         $("#status").append(result.currently.summary);
+         $("#min").append(result.daily.data["0"].temperatureMin+"F");
+         $("#rain").append(result.currently.precipProbability+"%");
+         $("#max").append(result.daily.data["0"].temperatureMax+"F");
        
      }
-       
+        
       
         
 
-         function weatherLookup(x){ 
-             
-            
+         $(function(){ 
+               
+              var x= ("https://api.darksky.net/forecast/13c7c3d7c0d1f00ccd3d109b56933094/"+lat +"," +long )
              var request= {
     
 
-     url: x,
+     url:(x),
      dataType: "jsonp",
      success: darkcomplete
              };
         
          $.ajax(request);
-         };        
+         });        
     
-
+}
 
         function lookupLatLong(city, state, postalCode) {
             var address = "";
@@ -126,46 +109,39 @@ var city = " ";
         function lookupWeatherForPostalCode_Click() {
             var pcode = $("#postalCode").val();
             lookupLatLong("", "", pcode);
-            
         }
 
+        
+
+        $(function() {
+            $("#lookupWeatherForPostalCode").on("click", lookupWeatherForPostalCode_Click)
+        });
+
         </script>
+<div class="container">
+    <div class="row" id="cards">
 
+    </div>
+</div>
 
-    <div class="container">
-        <div class="row" id="cards">
-
+<div id="templateDiv" style="display: none">
+        <div id="sunny" class="col-md-3" style="margin: 20px; border-radius: 10px; border: 1px solid #333333;">
+            <div class="row" style="text-align: center;"> /></div>
+            <div class="row" style="padding: 0 10px; text-align: center; border-top: 2px solid black; border-bottom: 2px solid black;">@@NAME@@</div>
+            <div class="row" style="padding: 15px 10px; text-align: center;">@@LOCATION@@</div>
         </div>
     </div>
-
-    <div id="templateDiv" style="display: none">
-        <div id="sunny" class="col-md-3" style="margin: 20px; border-radius: 10px; border: 1px solid #333333;"><button id="hide" class="btn btn-default pull-right glyphicon glyphicon-remove-sign"></button>
-            <div id="city" class="row" style="text-align: center;">"@@CITY@@"</div>
-            <div id="temp" class="row" style="padding: 0 10px; text-align: center;  border-bottom: 2px solid black;">@@TEMP@@</div>
-            <div id="brow" class="row">
-                <div id="rain" class="col-md-4" style="padding: 15px 10px; text-align: center;">@@MIN@@</div>
-                <div id="rain" class="col-md-4" style="padding: 15px 10px; text-align: center;">@@RAIN@@</div>
-                <div id="rain" class="col-md-4" style="padding: 15px 10px; text-align: center;">@@MAX@@</div>
-            </div>
-        </div>
-    </div>
-
     <script type="text/javascript">
 
-      $("#hide").click(function(){
-                $("#templateDiv").hide("scale", 500)});
-     
-     function generateCard(personInfo) {
+        function generateCard(personInfo) {
             // Insert the original HTML into a string by reading from the div. I wrote the HTML first, tested it looked right, 
             // then grabbed it as a string by asking jQuery to go get me the HTML from the DOM.
             var template = $("#templateDiv").html(); // gets the html from inside the templateDiv div
 
             // Swap out the values.
-            template = template.replace("@@CITY@@", personInfo.profilePhoto);
-            template = template.replace("@@TEMP@@", personInfo.name + "&degF"+ "<br />"+ "<br />" + personInfo.age);
-            template = template.replace("@@RAIN@@", personInfo.cityState +"%" +"<br />"+ "Rain");
-            template = template.replace("@@MIN@@", personInfo.min+ "&degF"+ "<br />"+"Min");
-            template = template.replace("@@MAX@@", personInfo.max+ "&degF"+ "<br />"+"Max");
+           // template = template.replace("@@IMGURL@@", personInfo.profilePhoto);
+            template = template.replace("@@NAME@@", personInfo.name + "<br />" + personInfo.age);
+            template = template.replace("@@LOCATION@@", personInfo.cityState);
 
             // Return the new HTML.
             return template;
@@ -173,26 +149,22 @@ var city = " ";
 
         function testGenerateCard() {
             var sampleData = {
-                name: temp,
-                cityState : rain,
-                age : sum,
-                profilePhoto: city,
-                min : min,
-                max : max,
+                name: "city",
+                cityState : "Lollipopland, MN",
+                age : "42",
+                //profilePhoto: "http://1.bp.blogspot.com/_IIRXllB6WyY/S_2V0-Pa4WI/AAAAAAAAA5k/jQRe4gHBzJA/s1600/lego_unicorn.jpg"
             };
 
-            
+            // The divs will automatically wrap because of Bootstrap knowing it's a col-md-3.
             var html = generateCard(sampleData);
             $("#cards").append(html);
 
         }
-        
-       
 
     </script>
 
 
-    <!--<div id="sunny" class="col-md-3">
+<!--<div id="sunny" class="col-md-3">
     <h4 id="city"></h4><br/>
     <h1 id="temp"><center></center></h1>
     <h2 id="status"><center></center></h2>

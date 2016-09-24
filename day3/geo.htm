@@ -5,10 +5,10 @@
 
 
 <!-- Latest compiled and minified JavaScript -->
-   <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-   
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>>
 
 <link rel="stylesheet" type="text/css" href="united.css">
 
@@ -19,12 +19,13 @@
 </head>
 
 <body>
-   
+
     <script>
+        
         function done(reply){
-        console.log(reply.results["0"].geometry.location.lat);
-     console.log(reply.results["0"].geometry.location.lng);
-       //console.log(reply);
+       var lat=reply.results["0"].geometry.location.lat;
+       var long=reply.results["0"].geometry.location.lng;
+      var latlong ="https://api.darksky.net/forecast/13c7c3d7c0d1f00ccd3d109b56933094/"+lat+","+long;
             
         }
         
@@ -37,12 +38,27 @@
     
 
     url:(zipcode),
-    //dataType: "jsonp",
     success: done
             };
         
         $.ajax(ask);
         });
+    
+     $(function() {
+$.ajax({
+    url:latlong,
+    dataType: "jsonp",
+    success: function(result){
+        console.log(result.currently.summary);
+    }
+});
+
+
+
+        });
+    
+    
+    
     </script>
 
 </body>
